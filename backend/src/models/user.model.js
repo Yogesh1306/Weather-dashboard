@@ -38,6 +38,9 @@ const userSchema = new Schema(
       enum: ["Celsius", "Fahrenheit"],
       default: "Celsius",
     },
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
