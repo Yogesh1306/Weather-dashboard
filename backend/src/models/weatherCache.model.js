@@ -1,25 +1,28 @@
 import mongoose, { Schema } from "mongoose";
 
-const weatherCacheSchema = new Schema({
-  city: {
-    type: String,
-    index: true,
+const weatherCacheSchema = new Schema(
+  {
+    latitude: {
+      type: String,
+      required: true
+    },
+    longitude: {
+      type: String,
+      required: true
+    },
+    weatherData: {
+      type: Object,
+      required: true
+    },
+    expiresAt:{
+      type: Date,
+      required: true
+    }
   },
-  country: {
-    type: String,
-  },
-  weatherData: {
-    type: Object,
-  },
-  fetchedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  expiresAt: {
-    type: Date,
-    index: { expires: 0 },
-  },
-});
+);
+
+weatherCacheSchema.index({ latitude: 1, longitude: 1 }, { unique: true });
+weatherCacheSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 export const WeatherCache = new mongoose.model(
   "WeatherCache",
