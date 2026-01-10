@@ -10,8 +10,10 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 import userRoutes from "./routes/user.routes.js";
+import weatherRoutes from "./routes/weather.routes.js";
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/weather", weatherRoutes);
 
 app.use(errorHandler);
 
